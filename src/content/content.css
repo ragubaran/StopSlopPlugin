@@ -1,0 +1,182 @@
+/**
+ * StopSlop - YouTube Content Script Stylesheet
+ */
+
+.stop-slop-card {
+  position: relative;
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+/* --- BLUR ACTION --- */
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) ytd-thumbnail,
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) .ytd-thumbnail,
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) yt-image,
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) #thumbnail {
+  filter: blur(18px) grayscale(70%) !important;
+  opacity: 0.35 !important;
+  pointer-events: none;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) #video-title,
+.stop-slop-flagged.stop-slop-action-blur:not(.stop-slop-revealed) .yt-core-attributed-string {
+  opacity: 0.55 !important;
+}
+
+/* --- HIDE ACTION --- */
+.stop-slop-flagged.stop-slop-action-hide:not(.stop-slop-revealed) {
+  display: none !important;
+}
+
+/* --- BADGE OVERLAY --- */
+.stop-slop-badge-container {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: auto;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+}
+
+.stop-slop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(220, 38, 38, 0.95);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  user-select: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.stop-slop-badge-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.stop-slop-badge-cat {
+  font-weight: 800;
+}
+
+.stop-slop-badge-reason {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* --- OVERLAY CONTROLS ON BLURRED CARDS --- */
+.stop-slop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  pointer-events: auto;
+}
+
+.stop-slop-revealed .stop-slop-overlay {
+  display: none !important;
+}
+
+.stop-slop-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #0f0f0f;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.stop-slop-action-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* --- QUICK ACTIONS HOVER BAR --- */
+.stop-slop-quick-actions {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: none;
+  gap: 6px;
+  z-index: 30;
+}
+
+.stop-slop-card:hover .stop-slop-quick-actions {
+  display: flex;
+}
+
+.stop-slop-mini-btn {
+  background: rgba(18, 18, 18, 0.9);
+  color: #e5e5e5;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 9px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.15s ease;
+}
+
+.stop-slop-mini-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+/* --- TOAST --- */
+.stop-slop-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999999;
+  background: #181818;
+  color: #ffffff;
+  border-left: 4px solid #dc2626;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: stopSlopSlideIn 0.25s ease-out;
+}
+
+@keyframes stopSlopSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
